@@ -39,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
             args.putBoolean(getString(R.string.is_tablet), false);
             recipeFragment.setArguments(args);
 
-            getSupportFragmentManager().beginTransaction().add(R.id.container_recipe, recipeFragment)
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_recipe, recipeFragment)
                     .commit();
         }else{
             args.putBoolean(getString(R.string.is_tablet), true);
             recipeFragment.setArguments(args);
 
-            getSupportFragmentManager().beginTransaction().add(R.id.container_recipe_land, recipeFragment)
+            getSupportFragmentManager().beginTransaction().replace(R.id.container_recipe_land, recipeFragment)
                     .commit();
         }
 

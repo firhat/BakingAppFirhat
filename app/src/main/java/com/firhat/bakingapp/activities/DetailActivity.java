@@ -34,7 +34,7 @@ public class DetailActivity extends AppCompatActivity implements StepAdapter.Lis
             stepFragment.setArguments(bundle);
 
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container_step, stepFragment)
+                    .replace(R.id.container_step, stepFragment)
                     .commit();
 
             if(findViewById(R.id.linear_layout_tablet) != null){
@@ -46,7 +46,7 @@ public class DetailActivity extends AppCompatActivity implements StepAdapter.Lis
                 detailStepFragment.setArguments(stepArgs);
 
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container_step_detail, detailStepFragment)
+                        .replace(R.id.container_step_detail, detailStepFragment)
                         .commit();
             }
 

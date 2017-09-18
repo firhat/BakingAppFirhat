@@ -86,19 +86,24 @@ public class DetailStepFragment extends Fragment implements ExoPlayer.EventListe
 
 
         if (step.getThumbnailURL() != null && !step.getThumbnailURL().isEmpty()) {
-            if (isVideoFile(step.getThumbnailURL())) {
+            /*if (isVideoFile(step.getThumbnailURL())) {
                 initializeVideoPlayer(Uri.parse(step.getThumbnailURL()));
             } else {
                 Glide.with(getContext())
                         .load(step.getThumbnailURL())
                         .into(thumbnail);
-            }
+            }*/
+            Glide.with(getContext())
+                    .load(step.getThumbnailURL())
+                    .into(thumbnail);
         } else {
             thumbnail.setVisibility(View.GONE);
         }
 
         if (step.getVideoURL() != null && !step.getVideoURL().isEmpty()) {
             initializeVideoPlayer(videoUri);
+        }else{
+            videoPlayer.setVisibility(View.GONE);
         }
 
     }
