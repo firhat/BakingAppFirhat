@@ -104,6 +104,7 @@ public class DetailStepFragment extends Fragment implements ExoPlayer.EventListe
             initializeVideoPlayer(videoUri);
         }else{
             videoPlayer.setVisibility(View.GONE);
+
         }
 
     }
