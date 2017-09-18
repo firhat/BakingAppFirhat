@@ -190,6 +190,7 @@ public class DetailStepFragment extends Fragment implements ExoPlayer.EventListe
                     null);
             exoPlayer.prepare(mediaSource);
             exoPlayer.setPlayWhenReady(true);
+            exoPlayer.seekTo(0,position);
         }
     }
 
