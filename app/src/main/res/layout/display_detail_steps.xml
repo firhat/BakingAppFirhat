@@ -1,65 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/recipe_step_desc_card"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:elevation="2dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/video_player"
-        tools:targetApi="lollipop">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/video_player"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/recipe_step_desc_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="UseCompoundDrawables">
+            android:elevation="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            tools:targetApi="lollipop">
 
-            <ImageView
-                android:id="@+id/iv_thumbnail"
-                android:scaleType="centerCrop"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/dummy_recipe_preview"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
-            <TextView
-                android:id="@+id/tv_step_instruction"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:textColor="#FFF"
-                android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/iv_thumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/dummy_recipe_preview" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_step_instruction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:text="asadadasdasdasda"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
-    </android.support.v7.widget.CardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="UseCompoundDrawables">
 
-    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-        android:id="@+id/video_player"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+                    <Button
+                        android:id="@+id/prev"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="Prev"
+                        android:background="@color/colorPrimary"/>
 
-</android.support.constraint.ConstraintLayout>
+                    <Button
+                        android:id="@+id/next"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Next"
+                        android:background="@color/colorPrimary"/>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</ScrollView>

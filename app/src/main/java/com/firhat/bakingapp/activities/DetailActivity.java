@@ -54,6 +54,10 @@ public class DetailActivity extends AppCompatActivity implements StepAdapter.Lis
 
     }
 
+    public void nextStep(){
+
+    }
+
     @Override
     public void onListItemClick(List<Step> stepsOut, int clickedItemIndex) {
         Step listStep = stepList.get(clickedItemIndex);
@@ -61,6 +65,8 @@ public class DetailActivity extends AppCompatActivity implements StepAdapter.Lis
         DetailStepFragment fragment = new DetailStepFragment();
         Bundle args = new Bundle();
         args.putParcelable(getResources().getString(R.string.parcel_step), listStep);
+        args.putParcelable(getResources().getString(R.string.parcel_step_data), recipe);
+        args.putString("index", String.valueOf(clickedItemIndex));
         fragment.setArguments(args);
 
         if (findViewById(R.id.linear_layout) != null) {

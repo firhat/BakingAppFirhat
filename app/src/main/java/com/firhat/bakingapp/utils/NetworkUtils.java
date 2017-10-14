@@ -3,7 +3,7 @@ package com.firhat.bakingapp.utils;
 
 import android.net.Uri;
 
-import com.firhat.bakingapp.models.Ingredient;
+import com.firhat.bakingapp.models.IngredientModel;
 import com.firhat.bakingapp.models.Recipe;
 import com.firhat.bakingapp.models.Step;
 
@@ -89,14 +89,14 @@ public class NetworkUtils {
             recipes[i].setImage(recipeInfo.getString(TAG_IMAGE));
             recipes[i].setServing(recipeInfo.getString(TAG_SERVINGS));
 
-            List<Ingredient> ingredientList = new ArrayList<>();
+            List<IngredientModel> ingredientList = new ArrayList<>();
             List<Step> stepList = new ArrayList<>();
 
             JSONArray ingredientArray = new JSONArray(recipeInfo.getString(TAG_INGREDIENTS));
-            Ingredient[] ingredients = new Ingredient[ingredientArray.length()];
+            IngredientModel[] ingredients = new IngredientModel[ingredientArray.length()];
 
             for (int j = 0; j < ingredientArray.length(); j++) {
-                ingredients[j] = new Ingredient();
+                ingredients[j] = new IngredientModel();
 
                 JSONObject ingredientInfo = ingredientArray.getJSONObject(j);
 

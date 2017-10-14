@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.firhat.bakingapp.R;
-import com.firhat.bakingapp.models.Ingredient;
+import com.firhat.bakingapp.models.IngredientModel;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ import java.util.List;
 
 public class IngredientAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Ingredient> mIngredients;
+    private List<IngredientModel> mIngredients;
 
-    public void setData(List<Ingredient> ingredients) {
+    public void setData(List<IngredientModel> ingredients) {
         mIngredients = ingredients;
         notifyDataSetChanged();
     }
 
-    public IngredientAdapter(List<Ingredient> ingredients) {
+    public IngredientAdapter(List<IngredientModel> ingredients) {
         mIngredients = ingredients;
     }
 
@@ -52,7 +52,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     private void configureViewHolder(IngredientViewHolder ingredientViewHolder, int position) {
-        Ingredient ingredient = mIngredients.get(position);
+        IngredientModel ingredient = mIngredients.get(position);
 
         ingredientViewHolder.ingredientTextView.setText(ingredient.getIngredient());
 

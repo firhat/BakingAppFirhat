@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -30,19 +28,17 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.URL;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 
 public class RecipeFragment extends Fragment {
 
     private final static String TAG = RecipeFragment.class.getSimpleName();
 
-    @BindView(R.id.progress_bar) ProgressBar loading;
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    ProgressBar loading;
+    RecyclerView recyclerView;
 
     boolean isTablet;
 
-    LinearLayoutManager layoutManager;
     GridLayoutManager gridLayoutManager;
 
     Recipe[] arrRecipe;
@@ -63,17 +59,18 @@ public class RecipeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view, savedInstanceState);
 
-        ButterKnife.bind(this, view);
+        loading = (ProgressBar)  view.findViewById(R.id.progress_bar);
+        recyclerView = (RecyclerView)  view.findViewById(R.id.recycler_view);
 
         if(getArguments() != null){
             isTablet = getArguments().getBoolean("IS_TABLET");
         }
 
         if(!isTablet){
-            layoutManager = new LinearLayoutManager(getActivity());
-            recyclerView.setLayoutManager(layoutManager);
+            gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+            recyclerView.setLayoutManager(gridLayoutManager);
         }else{
-            gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+            gridLayoutManager = new GridLayoutManager(getActivity(), 4);
             recyclerView.setLayoutManager(gridLayoutManager);
         }
 
@@ -119,9 +116,8 @@ public class RecipeFragment extends Fragment {
         @Override
         protected Recipe[] doInBackground(URL... params) {
             URL url = params[0];
-            String json = null;
             try {
-                json = NetworkUtils.getResponseFromHttp(url);
+                String json = NetworkUtils.getResponseFromHttp(url);
                 return NetworkUtils.getRecipeDataFromJson(json);
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage(), e);
@@ -143,7 +139,7 @@ public class RecipeFragment extends Fragment {
             loading.setVisibility(View.INVISIBLE);
             arrRecipe = recipes;
 
-            recyclerView.setAdapter(new RecipeAdapter(recipes, getContext()));
+            recyclerView.setAdapter(new RecipeAdapter(arrRecipe, getContext()));
         }
     }
 

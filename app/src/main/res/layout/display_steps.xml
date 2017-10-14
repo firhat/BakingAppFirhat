@@ -2,31 +2,32 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scroll_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
-            android:text="Recipe Ingredients"
-            android:layout_margin="10dp"
-            android:textSize="18sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Recipe Ingredients"
+            android:textSize="18sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/ingredient_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+
         <TextView
-            android:text="Steps Descriptions"
-            android:layout_margin="10dp"
-            android:textSize="18sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Steps Descriptions"
+            android:textSize="18sp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/step_recycler_view"

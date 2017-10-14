@@ -15,7 +15,7 @@ import com.firhat.bakingapp.R;
 import com.firhat.bakingapp.activities.DetailActivity;
 import com.firhat.bakingapp.adapters.IngredientAdapter;
 import com.firhat.bakingapp.adapters.StepAdapter;
-import com.firhat.bakingapp.models.Ingredient;
+import com.firhat.bakingapp.models.IngredientModel;
 import com.firhat.bakingapp.models.Recipe;
 import com.firhat.bakingapp.models.Step;
 import com.firhat.bakingapp.widget.UpdateBakingService;
@@ -26,14 +26,12 @@ import java.util.List;
 
 public class StepFragment extends Fragment {
 
-    private final static String TAG = StepFragment.class.getSimpleName();
-
     Recipe mRecipe;
 
     RecyclerView ingredientRecyclerView;
     RecyclerView stepRecyclerView;
 
-    List<Ingredient> ingredient = null;
+    List<IngredientModel> ingredient = null;
     List<Step> step = null;
 
     LinearLayoutManager layoutManager;
@@ -82,11 +80,8 @@ public class StepFragment extends Fragment {
         stepAdapter = new StepAdapter(step, (DetailActivity) getActivity());
         ingredientAdapter = new IngredientAdapter(ingredient);
 
-        layoutManager
-                = new LinearLayoutManager(getActivity());
-
-        linearLayoutManager
-                = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager= new LinearLayoutManager(getActivity());
 
         ingredientRecyclerView.setLayoutManager(layoutManager);
         stepRecyclerView.setLayoutManager(linearLayoutManager);

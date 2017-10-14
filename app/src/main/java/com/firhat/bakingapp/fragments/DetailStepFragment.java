@@ -11,12 +11,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.data.LocalUriFetcher;
 import com.firhat.bakingapp.R;
+import com.firhat.bakingapp.models.Recipe;
 import com.firhat.bakingapp.models.Step;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -38,6 +41,7 @@ import com.google.android.exoplayer2.util.Util;
 
 
 import java.net.URLConnection;
+import java.util.List;
 
 public class DetailStepFragment extends Fragment implements ExoPlayer.EventListener {
 
@@ -47,10 +51,16 @@ public class DetailStepFragment extends Fragment implements ExoPlayer.EventListe
     private MediaSessionCompat mediaSession;
     private PlaybackStateCompat.Builder stateBuilder;
 
+    private Button prevBtn;
+
     private SimpleExoPlayerView videoPlayer;
 
     Uri videoUri;
     long position;
+
+    Recipe recipe;
+    List<Step> stepList;
+    int stepIndex;
 
     public DetailStepFragment() {
 
@@ -71,12 +81,22 @@ public class DetailStepFragment extends Fragment implements ExoPlayer.EventListe
 
         if (getArguments() != null) {
             step = getArguments().getParcelable(getResources().getString(R.string.parcel_step));
+            recipe = getArguments().getParcelable(getResources().getString(R.string.parcel_step_data));
+            stepList = recipe.getSteps();
+            stepIndex = Integer.valueOf(getArguments().getString("index"));
         }
         videoUri = Uri.parse(step.getVideoURL());
 
         TextView instruction = (TextView) view.findViewById(R.id.tv_step_instruction);
         ImageView thumbnail = (ImageView) view.findViewById(R.id.iv_thumbnail);
         videoPlayer = (SimpleExoPlayerView) view.findViewById(R.id.video_player);
+        Button nextBtn = (Button) view.findViewById(R.id.next);
+        prevBtn = (Button) view.findViewById(R.id.prev);
+
+        if (stepIndex == 0){
+            prevBtn.setVisibility(View.INVISIBLE);
+        }
+
 
         instruction.setText(step.getDescription());
 
@@ -107,6 +127,64 @@ public class DetailStepFragment extends Fragment implements ExoPlayer.EventListe
 
         }
 
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Step listStep;
+
+                if (stepIndex<stepList.size()-1){
+                    listStep = stepList.get(stepIndex+1);
+                    stepIndex = stepIndex+1;
+                    //Log.e("SIZE", String.valueOf(stepList.size()));
+                    //Log.e("index", String.valueOf(stepIndex));
+
+                }else{
+                    listStep = stepList.get(0);
+                    stepIndex = 0;
+                }
+
+                DetailStepFragment fragment = new DetailStepFragment();
+                Bundle args = new Bundle();
+                args.putParcelable(getResources().getString(R.string.parcel_step), listStep);
+                args.putParcelable(getResources().getString(R.string.parcel_step_data), recipe);
+                args.putString("index", String.valueOf(stepIndex));
+                fragment.setArguments(args);
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container_step, fragment)
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
+
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Step listStep;
+
+                if (stepIndex >= 0){
+                    listStep = stepList.get(stepIndex-1);
+                    DetailStepFragment fragment = new DetailStepFragment();
+                    Bundle args = new Bundle();
+                    args.putParcelable(getResources().getString(R.string.parcel_step), listStep);
+                    args.putParcelable(getResources().getString(R.string.parcel_step_data), recipe);
+                    args.putString("index", String.valueOf(stepIndex-1));
+                    fragment.setArguments(args);
+
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container_step, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                }else{
+                    prevBtn.setVisibility(View.INVISIBLE);
+                }
+
+
+
+            }
+        });
+
     }
 
     @Override
@@ -130,6 +208,10 @@ public class DetailStepFragment extends Fragment implements ExoPlayer.EventListe
             } else {
                 initializeVideoPlayer(videoUri);
             }
+        }
+
+        if (stepIndex == 0){
+            prevBtn.setVisibility(View.INVISIBLE);
         }
     }
 

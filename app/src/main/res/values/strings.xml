@@ -8,6 +8,7 @@
 
     <string name="parcel_recipe">PARCEL_RECIPE</string>
     <string name="parcel_step">PARCEL_STEP</string>
+    <string name="parcel_step_data">PARCEL_STEP_DATA</string>
 
     <string name="hint_recipe">RECIPE</string>
     <string name="hint_qty">QTY</string>

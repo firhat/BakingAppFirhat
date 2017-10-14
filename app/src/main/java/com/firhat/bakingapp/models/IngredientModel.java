@@ -7,12 +7,12 @@ import android.os.Parcelable;
  * Created by Macbook on 9/18/17.
  */
 
-public class Ingredient implements Parcelable{
+public class IngredientModel implements Parcelable{
 
     private float quantity;
     private String measure, ingredient;
 
-    public Ingredient(){
+    public IngredientModel(){
 
     }
 
@@ -53,22 +53,22 @@ public class Ingredient implements Parcelable{
 
     }
 
-    private Ingredient(Parcel parcel){
+    private IngredientModel(Parcel parcel){
         quantity    = parcel.readFloat();
         measure     = parcel.readString();
         ingredient  = parcel.readString();
     }
 
-    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>(){
+    public static final Parcelable.Creator<IngredientModel> CREATOR = new Parcelable.Creator<IngredientModel>(){
 
         @Override
-        public Ingredient createFromParcel(Parcel parcel) {
-            return new Ingredient(parcel);
+        public IngredientModel createFromParcel(Parcel parcel) {
+            return new IngredientModel(parcel);
         }
 
         @Override
-        public Ingredient[] newArray(int i) {
-            return new Ingredient[i];
+        public IngredientModel[] newArray(int i) {
+            return new IngredientModel[i];
         }
     };
 }

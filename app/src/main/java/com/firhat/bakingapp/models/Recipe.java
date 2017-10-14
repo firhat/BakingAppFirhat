@@ -13,7 +13,7 @@ import java.util.List;
 public class Recipe implements Parcelable{
 
     private String name, serving, image;
-    private List<Ingredient> ingredients;
+    private List<IngredientModel> ingredients;
     private List<Step> steps;
 
     public Recipe(){
@@ -24,7 +24,7 @@ public class Recipe implements Parcelable{
         name = parcel.readString();
 
         ingredients = new ArrayList<>();
-        parcel.readList(ingredients, Ingredient.class.getClassLoader());
+        parcel.readList(ingredients, IngredientModel.class.getClassLoader());
 
         steps = new ArrayList<>();
         parcel.readList(steps, Step.class.getClassLoader());
@@ -50,11 +50,11 @@ public class Recipe implements Parcelable{
         this.serving = serving;
     }
 
-    public List<Ingredient> getIngredients() {
+    public List<IngredientModel> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(List<IngredientModel> ingredients) {
         this.ingredients = ingredients;
     }
 
